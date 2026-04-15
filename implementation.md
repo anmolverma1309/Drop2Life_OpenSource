@@ -181,11 +181,11 @@ You are absolutely right. The previous "Router" model was just a glorified FAQ b
 
 Instead of just *telling* the user what to do, it should **plan the mission** for them.
 
-Here is the **Advanced Phase 7: The "DevLens Architect" (Agentic Repo Buddy)**. This replaces the simple router with a state-aware agent that guides the user from "I want to help" to "git push".
+Here is the **Advanced Phase 7: The "Drop2Life_OpenSource Architect" (Agentic Repo Buddy)**. This replaces the simple router with a state-aware agent that guides the user from "I want to help" to "git push".
 
 ---
 
-### **Phase 7: The "DevLens Architect" (End-to-End Contribution Agent)**
+### **Phase 7: The "Drop2Life_OpenSource Architect" (End-to-End Contribution Agent)**
 
 *Goal: Transform the chatbot into an active "Pair Programmer" that creates a step-by-step contribution plan based on the specific type of issue.*
 
@@ -205,7 +205,7 @@ Here is the **Advanced Phase 7: The "DevLens Architect" (Agentic Repo Buddy)**. 
 
 #### **2. The "Investigator" Agent (Connecting Issues to the Graph)**
 
-* **The Problem:** Standard bots just read the issue text. DevLens has a **Dependency Graph** (Phase 2). It should use it.
+* **The Problem:** Standard bots just read the issue text. Drop2Life_OpenSource has a **Dependency Graph** (Phase 2). It should use it.
 * **Technical Implementation:**
 * **Graph-RAG Retrieval:** When a user selects an issue, the Agent doesn't just read the text. It:
 1. Extracts keywords (e.g., "Login failed").
@@ -300,7 +300,7 @@ poetry install
 
 ### **Phase 8: The "Personalization & Feasibility" Layer (Day 15)**
 
-*Goal: Transform DevLens from a generic tool into a personalized "Co-Pilot" that adapts to the user's skill level and filters out dead or overwhelming repositories.*
+*Goal: Transform Drop2Life_OpenSource from a generic tool into a personalized "Co-Pilot" that adapts to the user's skill level and filters out dead or overwhelming repositories.*
 
 **1. The "Gatekeeper" (Repo Health Audit)**
 

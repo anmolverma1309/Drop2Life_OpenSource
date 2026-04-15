@@ -577,7 +577,7 @@ export const initCommands = () => {
                 chatHistory: [{ role: 'system', content: `Starting mission for Issue #${issueNumber}...` }]
             });
 
-            writeOutput(`Consulting DevLens Architect for Issue #${issueNumber}...`);
+            writeOutput(`Consulting Drop2Life_OpenSource Architect for Issue #${issueNumber}...`);
 
             try {
                 const response = await apiClient.startMission(

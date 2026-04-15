@@ -12,6 +12,14 @@ class Settings(BaseSettings):
 
     # OpenRouter
     openrouter_api_key: str = ""
+    openrouter_http_referer: str = "http://localhost:8000"
+    openrouter_app_title: str = "Drop2Life_OpenSource"
+    openrouter_chat_model: str = "anthropic/claude-3.7-sonnet"
+
+    # Embeddings provider
+    embedding_provider: str = "local"   # "local" | "huggingface" | "bedrock"
+    hf_api_key: str = ""
+    hf_embedding_model: str = "sentence-transformers/all-MiniLM-L6-v2"
 
     # AWS (for Bedrock — Titan Embeddings v2)
     aws_region: str = "us-east-1"

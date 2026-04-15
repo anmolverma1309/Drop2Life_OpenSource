@@ -38,8 +38,8 @@ export const Terminal = () => {
         xtermRef.current = term;
         fitAddonRef.current = fitAddon;
 
-        term.writeln('DevLens OS [Version 1.0.0]');
-        term.writeln('(c) DevLens Corporation. All rights reserved.\r\n');
+        term.writeln('Drop2Life_OpenSource OS [Version 1.0.0]');
+        term.writeln('(c) Drop2Life_OpenSource Corporation. All rights reserved.\r\n');
         term.writeln('\x1b[36m── Quick Start ──────────────────────────────────────\x1b[0m');
         term.writeln('');
         term.writeln('  1. \x1b[1mingest <github-url>\x1b[0m   Clone & analyze a repo');

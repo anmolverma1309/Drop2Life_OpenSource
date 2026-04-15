@@ -1,5 +1,5 @@
 """
-Phase 7 Router: POST /api/v1/chatbot — The DevLens Architect endpoint.
+Phase 7 Router: POST /api/v1/chatbot — The Drop2Life_OpenSource Architect endpoint.
 
 Handles three flows:
   1. New Mission     — user provides an issue number → full investigation pipeline
@@ -54,7 +54,7 @@ class ChatResponse(BaseModel):
 @router.post(
     "/chatbot",
     response_model=ChatResponse,
-    summary="DevLens Architect — Agentic Contribution Engine",
+    summary="Drop2Life_OpenSource Architect — Agentic Contribution Engine",
 )
 async def chatbot(request: ChatRequest) -> ChatResponse:
     """
@@ -140,7 +140,7 @@ async def chatbot(request: ChatRequest) -> ChatResponse:
                 pass
         try:
             reply = await call_claude(
-                "You are DevLens Architect, a helpful AI pair programmer for open-source contributions. "
+                "You are Drop2Life_OpenSource Architect, a helpful AI pair programmer for open-source contributions. "
                 "Answer the user's question concisely. Use markdown formatting." + persona_suffix,
                 request.message,
                 max_tokens=1000,

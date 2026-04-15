@@ -10,14 +10,14 @@ export interface FeatureData {
 
 /**
  * Comprehensive feature list covering all backend + frontend phases.
- * Tree structure: DevLens Core → category → features
+ * Tree structure: Drop2Life_OpenSource Core → category → features
  */
 export const FEATURES: FeatureData[] = [
     // ─── Core Hub ───
     {
         id: "core",
-        title: "DevLens Core",
-        description: "The central intelligence engine that powers every DevLens feature — from repository ingestion to AI-driven code analysis.",
+        title: "Drop2Life_OpenSource Core",
+        description: "The central intelligence engine that powers every Drop2Life_OpenSource feature — from repository ingestion to AI-driven code analysis.",
         parent: null,
     },
 
@@ -115,7 +115,7 @@ export const FEATURES: FeatureData[] = [
     {
         id: "feature-explorer",
         title: "Feature Explorer",
-        description: "This very page — a 2D tree showing every DevLens capability at a glance, with hover-to-learn interactions powered by typewriter text.",
+        description: "This very page — a 2D tree showing every Drop2Life_OpenSource capability at a glance, with hover-to-learn interactions powered by typewriter text.",
         parent: "cat-viz",
     },
     {
@@ -159,7 +159,7 @@ export const FEATURES: FeatureData[] = [
     {
         id: "cli-engine",
         title: "CLI Engine",
-        description: "A terminal-based command interface built on xterm.js — the primary way to interact with every DevLens feature using simple text commands.",
+        description: "A terminal-based command interface built on xterm.js — the primary way to interact with every Drop2Life_OpenSource feature using simple text commands.",
         parent: "cat-workflow",
     },
 ];

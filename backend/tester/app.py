@@ -1,6 +1,6 @@
 """
-DevLens – Streamlit Backend Tester
-A side-by-side UI to test all DevLens backend endpoints interactively.
+Drop2Life_OpenSource – Streamlit Backend Tester
+A side-by-side UI to test all Drop2Life_OpenSource backend endpoints interactively.
 """
 
 import time
@@ -12,7 +12,7 @@ import pandas as pd
 # Page config
 # ---------------------------------------------------------------------------
 st.set_page_config(
-    page_title="DevLens Tester",
+    page_title="Drop2Life_OpenSource Tester",
     page_icon="🔍",
     layout="wide",
     initial_sidebar_state="expanded",
@@ -22,7 +22,7 @@ st.set_page_config(
 # Sidebar – server config
 # ---------------------------------------------------------------------------
 with st.sidebar:
-    st.title("🔍 DevLens Tester")
+    st.title("🔍 Drop2Life_OpenSource Tester")
     st.markdown("---")
     base_url = st.text_input(
         "Backend URL",
@@ -619,14 +619,14 @@ with tab_gatekeeper:
                     st.error(f"❌ Request failed: `{e}`")
 
 # ===========================================================================
-# TAB 11 — REPO BUDDY (Phase 7+8: DevLens Architect)
+# TAB 11 — REPO BUDDY (Phase 7+8: Drop2Life_OpenSource Architect)
 # ===========================================================================
 with tab_buddy:
     st.header("🤖 Repo Buddy — Your AI Pair Programmer")
 
     # ── Info banner: what the chatbot can do ──
     st.markdown("""
-    > **DevLens Architect** is an agentic chatbot that guides you through contributing to any GitHub repo — from picking an issue to pushing your fix.
+    > **Drop2Life_OpenSource Architect** is an agentic chatbot that guides you through contributing to any GitHub repo — from picking an issue to pushing your fix.
 
     | Capability | What it does |
     |---|---|

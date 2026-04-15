@@ -1,5 +1,5 @@
 """
-DevLens Backend – FastAPI entrypoint
+Drop2Life_OpenSource Backend – FastAPI entrypoint
 """
 
 from fastapi import FastAPI
@@ -8,7 +8,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from app.routers import repository, intelligence, chatbot
 
 app = FastAPI(
-    title="DevLens API",
+    title="Drop2Life_OpenSource API",
     description=(
         "AI-powered codebase navigator. "
         "Phases 1-7: Ingestion, Graph, Intelligence & Architect Agent."

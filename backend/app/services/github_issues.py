@@ -34,7 +34,7 @@ async def fetch_issue_by_number(
     headers: Dict[str, str] = {
         "Accept": "application/vnd.github+json",
         "X-GitHub-Api-Version": "2022-11-28",
-        "User-Agent": "DevLens-REST-Client",
+        "User-Agent": "Drop2Life_OpenSource-REST-Client",
     }
     if settings.github_pat:
         headers["Authorization"] = f"Bearer {settings.github_pat}"
@@ -105,7 +105,7 @@ async def fetch_beginner_issues(owner: str, repo: str) -> List[Dict[str, Any]]:
     headers = {
         "Authorization": f"Bearer {settings.github_pat}",
         "Content-Type": "application/json",
-        "User-Agent": "DevLens-GraphQL-Client"
+        "User-Agent": "Drop2Life_OpenSource-GraphQL-Client"
     }
 
     variables = {

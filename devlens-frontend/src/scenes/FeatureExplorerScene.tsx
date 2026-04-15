@@ -14,7 +14,7 @@ export const FeatureExplorerScene = () => {
             {/* Minimalist heading — LEFT aligned */}
             <div className="absolute top-6 left-8 z-20 text-left pointer-events-none">
                 <h1 className="text-white/80 text-xl font-extralight tracking-[0.4em] uppercase font-mono">
-                    DevLens
+                    Drop2Life_OpenSource
                 </h1>
                 <p className="text-white/25 text-[10px] tracking-[0.3em] uppercase mt-0.5 font-mono">
                     Feature Overview

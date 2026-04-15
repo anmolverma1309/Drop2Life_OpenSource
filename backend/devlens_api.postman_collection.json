@@ -1,8 +1,8 @@
 {
     "info": {
-        "_postman_id": "devlens-api-v1",
-        "name": "DevLens Backend API",
-        "description": "Complete API collection for the DevLens AI-powered codebase navigator. Covers all 13 endpoints across Phases 1-8.\n\nBase URL: http://localhost:8000\n\nTypical workflow:\n1. Gatekeeper → Check repo health\n2. Ingest → Clone + parse\n3. Status → Poll until complete\n4. Graph → Get dependency DAG\n5. Vectorize → Embed code\n6. Search/Explain/Intent → AI features\n7. Chatbot → AI pair programmer",
+        "_postman_id": "Drop2Life_OpenSource-api-v1",
+        "name": "Drop2Life_OpenSource Backend API",
+        "description": "Complete API collection for the Drop2Life_OpenSource AI-powered codebase navigator. Covers all 13 endpoints across Phases 1-8.\n\nBase URL: http://localhost:8000\n\nTypical workflow:\n1. Gatekeeper → Check repo health\n2. Ingest → Clone + parse\n3. Status → Poll until complete\n4. Graph → Get dependency DAG\n5. Vectorize → Embed code\n6. Search/Explain/Intent → AI features\n7. Chatbot → AI pair programmer",
         "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
     },
     "variable": [

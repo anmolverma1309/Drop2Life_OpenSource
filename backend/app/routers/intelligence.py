@@ -36,6 +36,15 @@ async def vectorize(request: VectorizeRequest) -> VectorizeResponse:
         result = await vectorize_repository(request.owner, request.repo)
     except ValueError as exc:
         raise HTTPException(status_code=404, detail=str(exc))
+    except ModuleNotFoundError as exc:
+        raise HTTPException(
+            status_code=503,
+            detail=(
+                "Vector store backend is unavailable (missing dependency). "
+                "Install ChromaDB dependencies or keep using non-vector endpoints. "
+                f"({exc})"
+            ),
+        )
     except Exception as exc:
         logger.exception("Vectorization failed")
         raise HTTPException(status_code=500, detail=str(exc))
@@ -78,7 +87,17 @@ async def search(request: SearchRequest) -> SearchResponse:
     repo_id = f"{request.owner}/{request.repo}"
 
     # Get the DiskStore for this repo
-    disk_store = storage_manager.get_store(repo_id, is_guest=False)
+    try:
+        disk_store = storage_manager.get_store(repo_id, is_guest=False)
+    except ModuleNotFoundError as exc:
+        raise HTTPException(
+            status_code=503,
+            detail=(
+                "Search backend is unavailable (missing ChromaDB dependency). "
+                "Install ChromaDB dependencies to enable /search. "
+                f"({exc})"
+            ),
+        )
 
     # Embed the query with Titan v2
     try:
@@ -150,7 +169,7 @@ class ExplainResponse(BaseModel):
     jargon_terms: list[JargonTerm] = []
 
 
-_EXPLAIN_SYSTEM = """You are DevLens Senior Mentor. Your job is to act as a supportive, highly knowledgeable, and patient mentor for a junior developer. 
+_EXPLAIN_SYSTEM = """You are Drop2Life_OpenSource Senior Mentor. Your job is to act as a supportive, highly knowledgeable, and patient mentor for a junior developer. 
 The user will provide you with a snippet of code or technical text from their repository.
 
 YOUR GOALS:
@@ -237,7 +256,7 @@ class IntentResponse(BaseModel):
     commits_analyzed: int
 
 
-_INTENT_SYSTEM = """You are DevLens Senior Architect.
+_INTENT_SYSTEM = """You are Drop2Life_OpenSource Senior Architect.
 You help engineers understand the "Architectural Intent" of a specific file based on its git commit history.
 
 The user will provide you with the file path and a list of historical commit messages affecting it.

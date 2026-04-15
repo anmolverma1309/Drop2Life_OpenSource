@@ -62,7 +62,10 @@ class IngestResponse(BaseModel):
 def _parse_owner_repo(github_url: str) -> tuple[str, str]:
     """Extract (owner, repo) from a validated GitHub URL."""
     parts = github_url.replace("https://github.com/", "").split("/")
-    return parts[0], parts[1]
+    owner, repo = parts[0], parts[1]
+    if repo.endswith(".git"):
+        repo = repo[:-4]
+    return owner, repo
 
 
 async def clone_repo(url: str, dest: str) -> Path:
@@ -114,7 +117,7 @@ async def fetch_metadata(
     if token:
         headers["Authorization"] = f"Bearer {token}"
 
-    async with httpx.AsyncClient(timeout=15.0) as client:
+    async with httpx.AsyncClient(timeout=15.0, follow_redirects=True) as client:
         resp = await client.get(
             f"https://api.github.com/repos/{owner}/{repo}",
             headers=headers,
@@ -149,7 +152,7 @@ async def ingest_repository(request: IngestRequest) -> IngestResponse:
 
     # mkdtemp creates the parent dir; git clone needs a NON-EXISTENT destination
     # so we use a subpath inside the temp parent that doesn't exist yet.
-    parent_temp = tempfile.mkdtemp(prefix=f"devlens_")
+    parent_temp = tempfile.mkdtemp(prefix=f"Drop2Life_OpenSource_")
     dest = str(Path(parent_temp) / f"{owner}_{repo}")
 
     try:

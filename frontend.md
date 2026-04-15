@@ -1,7 +1,7 @@
-DevLens Frontend Architecture — Cinematic CLI Operating System (Vite Edition)
+Drop2Life_OpenSource Frontend Architecture — Cinematic CLI Operating System (Vite Edition)
 0. CORE PHILOSOPHY
 
-DevLens frontend is:
+Drop2Life_OpenSource frontend is:
 
 CLI-first
 
@@ -51,8 +51,8 @@ No component may directly call fetch/axios.
 
 2. PROJECT INITIALIZATION
 2.1 Create Project
-npm create vite@latest devlens-frontend -- --template react-ts
-cd devlens-frontend
+npm create vite@latest Drop2Life_OpenSource-frontend -- --template react-ts
+cd Drop2Life_OpenSource-frontend
 npm install
 2.2 Install Dependencies
 npm install tailwindcss postcss autoprefixer

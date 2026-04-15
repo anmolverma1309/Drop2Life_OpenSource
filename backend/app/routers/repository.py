@@ -79,17 +79,16 @@ async def get_status(owner: str, repo: str) -> dict:
     repo_id = f"{owner}/{repo}"
     store = storage_manager.get_store(repo_id, is_guest=True)
     
-    # If the store has 'graph', parsing is done.
-    # If it has 'clone_path' but no graph, it might still be parsing or failed.
-    # Since we set clone_path after parsing in _run_parser_and_store, actually both are set together.
-    # Wait, during ingest we don't set anything in the RAMStore until parsing finishes!
-    # Let's fix that too: we should set "status": "parsing" in RAMStore right before kicking off the background task, so we know it's tracking.
     if store.get("graph") is not None:
         return {"status": "completed"}
-    elif store.get("status") == "parsing":
+
+    state = store.get("status")
+    if state == "parsing":
         return {"status": "parsing"}
-    else:
-        return {"status": "not_found"}
+    if state == "failed":
+        return {"status": "failed"}
+
+    return {"status": "not_found"}
 
 # ---------------------------------------------------------------------------
 # Internal background task

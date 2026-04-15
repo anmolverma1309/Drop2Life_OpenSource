@@ -69,7 +69,7 @@ def _gather_repo_context(root: Path) -> str:
 # ── LLM-powered setup generation ──────────────────────────────────────────
 
 _SETUP_SYSTEM_PROMPT = """\
-You are DevLens Setup Assistant.
+You are Drop2Life_OpenSource Setup Assistant.
 Given the contents of a repository's README, CONTRIBUTING guide, and config files,
 generate PRECISE, REPO-SPECIFIC setup instructions as ready-to-paste terminal commands.
 
@@ -182,8 +182,8 @@ def _template_setup(root: Path) -> Dict[str, str]:
         bash_lines.append("docker-compose up -d")
         ps1_lines.append("docker-compose up -d")
     elif has_docker:
-        bash_lines.append("docker build -t devlens-app .\ndocker run -p 8080:8080 devlens-app")
-        ps1_lines.append("docker build -t devlens-app .\ndocker run -p 8080:8080 devlens-app")
+        bash_lines.append("docker build -t Drop2Life_OpenSource-app .\ndocker run -p 8080:8080 Drop2Life_OpenSource-app")
+        ps1_lines.append("docker build -t Drop2Life_OpenSource-app .\ndocker run -p 8080:8080 Drop2Life_OpenSource-app")
 
     if len(bash_lines) == 2:
         bash_lines.append("echo 'No standard configuration files detected.'")

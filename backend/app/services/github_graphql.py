@@ -66,7 +66,7 @@ async def fetch_repository_history(owner: str, repo: str, limit: int = 50) -> Li
     headers = {
         "Authorization": f"Bearer {settings.github_pat}",
         "Content-Type": "application/json",
-        "User-Agent": "DevLens-GraphQL-Client"
+        "User-Agent": "Drop2Life_OpenSource-GraphQL-Client"
     }
 
     variables = {

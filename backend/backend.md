@@ -1,4 +1,4 @@
-# DevLens Backend API Documentation
+# Drop2Life_OpenSource Backend API Documentation
 
 > **Version:** 0.1.0  
 > **Base URL:** `http://localhost:8000`  
@@ -135,7 +135,7 @@ POST /api/v1/repository/ingest
     "topics": ["flask", "python", "web"],
     "html_url": "https://github.com/pallets/flask"
   },
-  "clone_path": "/tmp/devlens_xyz/pallets_flask",
+  "clone_path": "/tmp/Drop2Life_OpenSource_xyz/pallets_flask",
   "status": "ingested",
   "message": ""
 }
@@ -515,7 +515,7 @@ Pre-ingestion check — evaluates whether a repo is healthy and beginner-friendl
 
 ---
 
-## 13. Chatbot (DevLens Architect)
+## 13. Chatbot (Drop2Life_OpenSource Architect)
 
 ```
 POST /api/v1/chatbot
