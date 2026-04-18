@@ -7,7 +7,7 @@ This document tracks the delivery of features outlined in the project's strategy
 ## 1. Core Engines (Infrastructure & Data Layer)
 
 | Feature | Status | Details & Endpoints |
-| :--- | :--- | :--- |
+| :--- | :--- | :--- | 
 | **FastAPI & Async Architecture** | ✅ Implemented | High-concurrency routing, asynchronous subprocess calls. |
 | **AI Clients (OpenRouter & AWS)** | ✅ Implemented | `app/services/bedrock_client.py` using Nemotron-3 (OpenRouter) & Titan v2 (AWS Bedrock). |
 | **HybridStorageManager** | ✅ Implemented | `app/storage/hybrid_storage.py` handles ephemeral `RAMStore` and persistent ChromaDB `DiskStore`. |
