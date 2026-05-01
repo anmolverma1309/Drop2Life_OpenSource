@@ -33,12 +33,12 @@ export const FeatureExplanationCard = ({ feature, x, y }: Props) => {
         >
             {/* Text on the left */}
             <div className="flex-1 pr-4 pt-1 flex flex-col min-w-0">
-                <div className="text-cyan-400 text-sm font-mono uppercase tracking-widest mb-2.5 pb-2 border-b border-slate-700/50">
+                <div className="text-emerald-300 text-sm font-mono uppercase tracking-widest mb-2.5 pb-2 border-b border-emerald-900/60">
                     {feature.title}
                 </div>
                 <div className="text-slate-300 text-sm leading-relaxed font-sans">
                     {typedText}
-                    <span className="inline-block w-1.5 h-4 ml-1 bg-cyan-500 animate-pulse"></span>
+                    <span className="inline-block w-1.5 h-4 ml-1 bg-emerald-400 animate-pulse"></span>
                 </div>
             </div>
 
@@ -47,7 +47,7 @@ export const FeatureExplanationCard = ({ feature, x, y }: Props) => {
                 <img
                     src="/anime_mentor.png"
                     alt="Mentor"
-                    className="w-[140px] h-auto object-contain drop-shadow-[0_0_12px_rgba(6,182,212,0.3)]"
+                    className="w-[140px] h-auto object-contain drop-shadow-[0_0_12px_rgba(52,211,153,0.35)]"
                 />
             </div>
         </motion.div>

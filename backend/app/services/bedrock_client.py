@@ -172,6 +172,9 @@ async def call_claude(system_prompt: str, user_message: str, max_tokens: int = 2
     Async wrapper for OpenRouter Chat API (Nemotron 3).
     """
     settings = get_settings()
+    if not settings.openrouter_api_key:
+        raise RuntimeError("OPENROUTER_API_KEY is not configured")
+
     headers = {
         "Authorization": f"Bearer {settings.openrouter_api_key}",
         "HTTP-Referer": settings.openrouter_http_referer,

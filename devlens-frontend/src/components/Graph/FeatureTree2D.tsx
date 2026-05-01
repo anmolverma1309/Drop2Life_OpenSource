@@ -141,7 +141,7 @@ export const FeatureTree2D = () => {
                                 key={`${edge.from}-${edge.to}`}
                                 x1={fx} y1={fy}
                                 x2={tx} y2={ty}
-                                stroke="#334155"
+                                stroke="#1f5c52"
                                 strokeWidth="1.5"
                                 strokeDasharray="4 3"
                             />

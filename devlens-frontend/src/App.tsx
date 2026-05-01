@@ -16,9 +16,16 @@ function App() {
   }, []);
 
   const showParticles = mode === 'landing' || mode === 'ingesting' || mode === 'feature-explorer';
+  const isHomeMode = showParticles;
+
+  const rootBackgroundClass = isHomeMode
+    ? 'bg-gradient-to-br from-slate-950 via-teal-950 to-emerald-950'
+    : 'bg-background';
+
+  const particleColor = isHomeMode ? '#5EEAD4' : '#ffffff';
 
   return (
-    <div className="w-screen h-screen bg-background relative overflow-hidden flex items-center justify-center">
+    <div className={`w-screen h-screen relative overflow-hidden flex items-center justify-center ${rootBackgroundClass}`}>
       {showParticles && (
         <Particles
           id="tsparticles"
@@ -27,7 +34,7 @@ function App() {
             background: { color: { value: "transparent" } },
             fpsLimit: 60,
             particles: {
-              color: { value: "#ffffff" },
+              color: { value: particleColor },
               links: { enable: false },
               move: { enable: true, speed: 0.5, direction: "none", random: true, straight: false, outModes: "out" },
               number: { value: 100, density: { enable: true, area: 800 } },
