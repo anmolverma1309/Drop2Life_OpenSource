@@ -1,6 +1,6 @@
-# DevLens
+# Drop2Life_OpenSource
 
-DevLens is an AI-powered onboarding navigator that acts as a "Digital Senior Mentor" for your codebase.
+Drop2Life_OpenSource is an AI-powered onboarding navigator that acts as a "Digital Senior Mentor" for your codebase.
 
 ## Key Features
 1. **Repository Ingestion & Visualization:** Deterministic parsing of Python ASTs to generate comprehensive visual dependency graphs.
@@ -9,7 +9,7 @@ DevLens is an AI-powered onboarding navigator that acts as a "Digital Senior Men
 4. **The Indic Bridge (Jargon Buster):** LLM-powered mentor that simplifies technical jargon in English, Hindi, Tamil, Hinglish, etc.
 5. **Environment Setup Guidance:** Scans repo configs to generate 1-click Bash/PowerShell setup scripts.
 6. **Beginner Issue Matcher:** Identifies "Good First Issues" and flags if they are actively being worked on in other PRs.
-7. **DevLens Architect (Agentic Onboarding):** End-to-end contribution planner that graphs blast-radiuses and reads terminal outputs.
+7. **Drop2Life_OpenSource Architect (Agentic Onboarding):** End-to-end contribution planner that graphs blast-radiuses and reads terminal outputs.
 8. **Personalized Feasibility Engine:** Repo gatekeeper and stateless User Profile context injection to ensure the AI speaks at the right skill level.
 
 ## How to Run the Project Locally
