@@ -1,4 +1,10 @@
-const BASE_URL = '/api/v1';
+const configuredBase = (import.meta.env.VITE_API_BASE_URL || '').trim();
+const BASE_URL = configuredBase
+    ? configuredBase.endsWith('/api/v1')
+        ? configuredBase.replace(/\/$/, '')
+        : `${configuredBase.replace(/\/$/, '')}/api/v1`
+    : '/api/v1';
+
 const TIMEOUT_MS = 30_000; // 30 seconds for AI calls
 
 function fetchWithTimeout(url: string, options: RequestInit = {}): Promise<Response> {
@@ -7,11 +13,16 @@ function fetchWithTimeout(url: string, options: RequestInit = {}): Promise<Respo
     return fetch(url, { ...options, signal: controller.signal }).finally(() => clearTimeout(timer));
 }
 
+function buildUrl(endpoint: string): string {
+    const normalizedEndpoint = endpoint.startsWith('/') ? endpoint : `/${endpoint}`;
+    return `${BASE_URL}${normalizedEndpoint}`;
+}
+
 export const apiClient = {
     get: async (endpoint: string) => {
         let res: Response;
         try {
-            res = await fetchWithTimeout(`${BASE_URL}${endpoint}`);
+            res = await fetchWithTimeout(buildUrl(endpoint));
         } catch (err: any) {
             if (err.name === 'AbortError') throw new Error(`Request timed out: ${endpoint}`);
             throw new Error(`Network error: ${err.message}`);
@@ -22,7 +33,7 @@ export const apiClient = {
     post: async (endpoint: string, body?: any) => {
         let res: Response;
         try {
-            res = await fetchWithTimeout(`${BASE_URL}${endpoint}`, {
+            res = await fetchWithTimeout(buildUrl(endpoint), {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: body ? JSON.stringify(body) : undefined,
