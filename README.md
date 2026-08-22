@@ -15,40 +15,98 @@ Drop2Life_OpenSource is an AI-powered onboarding navigator that acts as a "Digit
 ## System Architecture
 
 ```mermaid
-flowchart TD
+flowchart LR
+    %% User touchpoints
     U[Developer / Contributor] --> F[Frontend\nReact + TypeScript + Tailwind]
-    F --> C[CLI Interface\nGraph Explorer\nTerminal Panel]
-    C --> API[Backend API\nFastAPI + Python]
+    F --> CLI[CLI Interface\nGraph Explorer\nTerminal Panel]
+    F --> PAN[Panels\nCode Viewer\nArchitect\nIntent\nExplain]
 
-    API --> ING[Repository Ingestion]
-    ING --> GIT[GitHub Metadata\nGraphQL + git clone]
-    ING --> PARSER[AST / Parser Layer\nTree-sitter + Python parsing]
-    PARSER --> GRAPH[Dependency Graph\nArchitecture Map]
-    GRAPH --> VIZ[Visualization Layer\nFeature graph + file relationships]
+    %% Frontend to backend flow
+    CLI --> API[FastAPI Backend\nREST + async services]
+    PAN --> API
 
-    API --> SEARCH[Issue-to-Code Search]
-    SEARCH --> HYB[Hybrid Retrieval\nDense + Sparse Search]
-    HYB --> CHROMA[ChromaDB\nVector Store]
-    HYB --> BEDROCK[AWS Bedrock\nTitan Embeddings]
+    subgraph FE[Frontend Layer]
+        F
+        CLI
+        PAN
+    end
 
-    API --> EXPLAIN[Jargon Buster / Explain Engine]
-    API --> CHAT[Architect Agent\nContribution Planner]
-    CHAT --> LLM[OpenRouter / LLM Reasoning]
+    subgraph BE[Backend Orchestration]
+        API
+        ING[Repository Ingestion]
+        SEARCH[Issue-to-Code Search]
+        EXPLAIN[Jargon Buster\nIndic Bridge]
+        CHAT[Architect Agent\nContribution Planner]
+        GATE[Gatekeeper\nFeasibility Engine]
+        SETUP[Setup Generator]
+    end
 
-    GIT --> KNOW[Repo Context\nIssues / PRs / History]
-    KNOW --> CHAT
-    KNOW --> SEARCH
-    KNOW --> EXPLAIN
+    subgraph DATA[Repo Intelligence Layer]
+        GIT[GitHub Metadata\nGraphQL + Shallow Clone]
+        META[Issues / PRs / Commits\nHistory + Context]
+        PARSER[Parser + AST Analysis]
+        GRAPH[Dependency Graph\nArchitecture Map]
+        CHUNK[Chunked Code + Metadata]
+        EMBED[AWS Bedrock\nTitan Embeddings]
+        VEC[(ChromaDB\nVector Store)]
+    end
 
-    classDef frontend fill:#1e3a5f,stroke:#90cdf4,color:#fff;
+    subgraph AI[LLM / Reasoning Layer]
+        LLM[OpenRouter\nNemotron / LLM reasoning]
+        RR[Repository Reasoning\nIssue solving guidance]
+    end
+
+    %% Ingestion flow
+    API --> ING
+    ING --> GIT
+    GIT --> META
+    META --> PARSER
+    PARSER --> GRAPH
+    GRAPH --> CHUNK
+    CHUNK --> EMBED
+    EMBED --> VEC
+
+    %% Search and intelligence flow
+    API --> SEARCH
+    SEARCH --> VEC
+    SEARCH --> META
+    SEARCH --> RR
+
+    API --> EXPLAIN
+    EXPLAIN --> LLM
+
+    API --> CHAT
+    CHAT --> LLM
+    CHAT --> META
+    CHAT --> GRAPH
+
+    API --> GATE
+    GATE --> META
+    GATE --> GRAPH
+
+    API --> SETUP
+    SETUP --> GIT
+    SETUP --> META
+
+    %% Outputs to user
+    RR --> F
+    GRAPH --> F
+    SEARCH --> F
+    EXPLAIN --> F
+    CHAT --> F
+    SETUP --> F
+
+    classDef user fill:#0f172a,stroke:#94a3b8,color:#fff;
+    classDef frontend fill:#1d4ed8,stroke:#bfdbfe,color:#fff;
     classDef backend fill:#0f766e,stroke:#99f6e4,color:#fff;
-    classDef ai fill:#7c3aed,stroke:#ddd6fe,color:#fff;
     classDef data fill:#9a5b00,stroke:#fcd34d,color:#fff;
+    classDef ai fill:#7c3aed,stroke:#ddd6fe,color:#fff;
 
-    class F,C frontend;
-    class API,ING,PARSER,GRAPH,VIZ,SEARCH,EXPLAIN,CHAT backend;
-    class HYB,CHROMA,BEDROCK,LLM ai;
-    class GIT,KNOW data;
+    class U user;
+    class F,CLI,PAN frontend;
+    class API,ING,SEARCH,EXPLAIN,CHAT,GATE,SETUP backend;
+    class GIT,META,PARSER,GRAPH,CHUNK,EMBED,VEC data;
+    class LLM,RR ai;
 ```
 
 ## How to Run the Project Locally
