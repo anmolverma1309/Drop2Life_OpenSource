@@ -115,32 +115,41 @@ Drop2Life_OpenSource is a **"Digital Senior Mentor"** that:
 ## SLIDE 7: Technical Architecture Overview
 ### Three-Tier System Design
 
-```
-┌─────────────────────────────────────────┐
-│   FRONTEND (React + Tailwind CSS)       │
-│   - Cinematic CLI Interface             │
-│   - Force-Directed Graph Visualization  │
-│   - Real-time Terminal                  │
-│   - Zero Traditional Navigation         │
-└──────────────────┬──────────────────────┘
-                   │
-                   ▼
-┌─────────────────────────────────────────┐
-│   BACKEND API (FastAPI + Python)        │
-│   - Async/await Architecture            │
-│   - Repository Ingestion                │
-│   - Graph Construction                  │
-│   - RAG Orchestration                   │
-└──────────────────┬──────────────────────┘
-                   │
-                   ▼
-┌─────────────────────────────────────────┐
-│   AI & ML LAYER                         │
-│   - OpenRouter (Nemotron-3)             │
-│   - AWS Bedrock (Titan Embeddings v2)   │
-│   - ChromaDB (Vector Store)             │
-│   - Python AST (Deterministic Parsing)  │
-└─────────────────────────────────────────┘
+```mermaid
+flowchart TD
+    U[Developer / Contributor] --> F[Frontend\nReact + TypeScript + Tailwind]
+    F --> C[CLI Interface\nGraph Explorer\nTerminal Panel]
+    C --> API[Backend API\nFastAPI + Python]
+
+    API --> ING[Repository Ingestion]
+    ING --> GIT[GitHub Metadata\nGraphQL + git clone]
+    ING --> PARSER[AST / Parser Layer\nTree-sitter + Python parsing]
+    PARSER --> GRAPH[Dependency Graph\nArchitecture Map]
+    GRAPH --> VIZ[Visualization Layer\nFeature graph + file relationships]
+
+    API --> SEARCH[Issue-to-Code Search]
+    SEARCH --> HYB[Hybrid Retrieval\nDense + Sparse Search]
+    HYB --> CHROMA[ChromaDB\nVector Store]
+    HYB --> BEDROCK[AWS Bedrock\nTitan Embeddings]
+
+    API --> EXPLAIN[Jargon Buster / Explain Engine]
+    API --> CHAT[Architect Agent\nContribution Planner]
+    CHAT --> LLM[OpenRouter / LLM Reasoning]
+
+    GIT --> KNOW[Repo Context\nIssues / PRs / History]
+    KNOW --> CHAT
+    KNOW --> SEARCH
+    KNOW --> EXPLAIN
+
+    classDef frontend fill:#1e3a5f,stroke:#90cdf4,color:#fff;
+    classDef backend fill:#0f766e,stroke:#99f6e4,color:#fff;
+    classDef ai fill:#7c3aed,stroke:#ddd6fe,color:#fff;
+    classDef data fill:#9a5b00,stroke:#fcd34d,color:#fff;
+
+    class F,C frontend;
+    class API,ING,PARSER,GRAPH,VIZ,SEARCH,EXPLAIN,CHAT backend;
+    class HYB,CHROMA,BEDROCK,LLM ai;
+    class GIT,KNOW data;
 ```
 
 ---

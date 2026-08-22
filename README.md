@@ -5,12 +5,51 @@ Drop2Life_OpenSource is an AI-powered onboarding navigator that acts as a "Digit
 ## Key Features
 1. **Repository Ingestion & Visualization:** Deterministic parsing of Python ASTs to generate comprehensive visual dependency graphs.
 2. **Issue-to-Code Mapping:** Hybrid Dense + Sparse Vector Search utilizing AWS Titan v2 and ChromaDB.
-3. **Architectural Intent:** Analyzes historical Pull Requests via GitHub GraphQL and OpenRouter to explain *why* code exists.
+3. **Architectural Intent:** Analyzes historical Pull Requests via GitHub GraphQL and OpenRouter to explain *why* code exists. 
 4. **The Indic Bridge (Jargon Buster):** LLM-powered mentor that simplifies technical jargon in English, Hindi, Tamil, Hinglish, etc.
 5. **Environment Setup Guidance:** Scans repo configs to generate 1-click Bash/PowerShell setup scripts.
 6. **Beginner Issue Matcher:** Identifies "Good First Issues" and flags if they are actively being worked on in other PRs.
 7. **Drop2Life_OpenSource Architect (Agentic Onboarding):** End-to-end contribution planner that graphs blast-radiuses and reads terminal outputs.
 8. **Personalized Feasibility Engine:** Repo gatekeeper and stateless User Profile context injection to ensure the AI speaks at the right skill level.
+
+## System Architecture
+
+```mermaid
+flowchart TD
+    U[Developer / Contributor] --> F[Frontend\nReact + TypeScript + Tailwind]
+    F --> C[CLI Interface\nGraph Explorer\nTerminal Panel]
+    C --> API[Backend API\nFastAPI + Python]
+
+    API --> ING[Repository Ingestion]
+    ING --> GIT[GitHub Metadata\nGraphQL + git clone]
+    ING --> PARSER[AST / Parser Layer\nTree-sitter + Python parsing]
+    PARSER --> GRAPH[Dependency Graph\nArchitecture Map]
+    GRAPH --> VIZ[Visualization Layer\nFeature graph + file relationships]
+
+    API --> SEARCH[Issue-to-Code Search]
+    SEARCH --> HYB[Hybrid Retrieval\nDense + Sparse Search]
+    HYB --> CHROMA[ChromaDB\nVector Store]
+    HYB --> BEDROCK[AWS Bedrock\nTitan Embeddings]
+
+    API --> EXPLAIN[Jargon Buster / Explain Engine]
+    API --> CHAT[Architect Agent\nContribution Planner]
+    CHAT --> LLM[OpenRouter / LLM Reasoning]
+
+    GIT --> KNOW[Repo Context\nIssues / PRs / History]
+    KNOW --> CHAT
+    KNOW --> SEARCH
+    KNOW --> EXPLAIN
+
+    classDef frontend fill:#1e3a5f,stroke:#90cdf4,color:#fff;
+    classDef backend fill:#0f766e,stroke:#99f6e4,color:#fff;
+    classDef ai fill:#7c3aed,stroke:#ddd6fe,color:#fff;
+    classDef data fill:#9a5b00,stroke:#fcd34d,color:#fff;
+
+    class F,C frontend;
+    class API,ING,PARSER,GRAPH,VIZ,SEARCH,EXPLAIN,CHAT backend;
+    class HYB,CHROMA,BEDROCK,LLM ai;
+    class GIT,KNOW data;
+```
 
 ## How to Run the Project Locally
 
