@@ -15,7 +15,7 @@ Phases 1-8 below are **all implemented**, backend and frontend, contrary to earl
 
 **Before Phase 9 starts:** three small hardening fixes (auto-vectorize, search command, onboarding modal) — see `implemented.md` §5.
 
-**Phase 9 onward:** split by owner — `implementation-haragam.md` (Track B: Security & Automation — Phase 11, 16, 13, 15 + Phase 12 summary/churn work) and `implementation-garv.md` (Track A: Identity & Data — Phase 9, 10, 14). Both docs carry the same shared integration-checks list.
+**Phase 9 onward:** owned by Anmol — covering Track A (Identity & Data — Phase 9, 10, 14) and Track B (Security & Automation — Phase 11, 16, 13, 15 + Phase 12 summary/churn work), tracked in `implementation-anmol.md`.
 
 ---
 

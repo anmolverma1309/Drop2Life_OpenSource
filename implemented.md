@@ -1,6 +1,6 @@
 # DevLens Implementation Status
 
-This document tracks the delivery of features outlined in the project's strategy documents (`idea.md`, `technical.md`, `implementation.md`, `implementation-haragam.md`, and `implementation-garv.md`). It serves as a master checklist to flag what has been built, what is wired end-to-end, and what remains to be built.
+This document tracks the delivery of features outlined in the project's strategy documents (`idea.md`, `technical.md`, `implementation.md`, and `implementation-anmol.md`). It serves as a master checklist to flag what has been built, what is wired end-to-end, and what remains to be built.
 
 **Last verified against the actual codebase:** 2026-09-13. Earlier versions of this file marked Phase 7, Phase 8, and the entire frontend as "Not Implemented" — that was stale. All three exist and are largely wired together. See §5 for the real remaining gaps.
 
@@ -73,7 +73,7 @@ These are small, concrete bugs in already-"complete" phases, not new features:
 3. **Build the persona onboarding modal.** One-time calibration UI (level/language/goal) per `frontend.md` §7, wiring into `useAppStore.userProfile`. *(Frontend, small-medium.)*
 
 ### Phase 9 onward
-Everything else — GitHub OAuth, Skill Fingerprint, Global Search, Security Scanning, the shipped-but-needs-polish 3D map, Impact Simulator, Memory/Motivation layer, Maintainer Mode, Test Generation — is tracked phase-by-phase, split by owner: `implementation-garv.md` (Phase 9, 10, 14) and `implementation-haragam.md` (Phase 11, 16, 13, 15 + Phase 12's summary/churn work). Both carry the same shared integration-checks list.
+Everything else — GitHub OAuth, Skill Fingerprint, Global Search, Security Scanning, the shipped-but-needs-polish 3D map, Impact Simulator, Memory/Motivation layer, Maintainer Mode, Test Generation — is tracked phase-by-phase in `implementation-anmol.md` (owned by Anmol).
 
 ### Lower priority / infra debt
 4. **Context Window Degradation (Map-Reduce):** PR-history summarization still just trims context instead of true map-reduce if it exceeds ~15k tokens ("Lost in the Middle" mitigation). Phase 12 Feature 3 (Instant Summaries) will need this properly.

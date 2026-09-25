@@ -1,10 +1,10 @@
-# Haragam's Implementation Plan — Track B: Security & Automation
+# Anmol's Implementation Plan — Track B: Security & Automation
 
-Split off from the old `implementation-phases-9-16.md` (now deleted — Garv's half lives in `implementation-garv.md`). Phases 1-8 are already built; this covers your assigned slice of Phase 9-16, in order.
+Phases 1-8 are already built; this covers the Track B slice of Phase 9-16, in order.
 
-**Your order:** `Phase 11 → Phase 16 → Phase 13 → Phase 15`, **plus Phase 12 Features 2 & 3** (reassigned to you — see rationale below).
+**Order:** `Phase 11 → Phase 16 → Phase 13 → Phase 15`, **plus Phase 12 Features 2 & 3**.
 
-**Why this order:** Phase 11 has zero dependency on anything — start it immediately, in parallel with Garv's Phase 9. Phase 16 also only needs Phase 5 (already built). Phase 13 needs Garv's Phase 9 sign-in gate, so start its static-analysis half while waiting and wire the auth check last. Phase 15 is the most complex (needs a GitHub App, not just OAuth) — treat it as a stretch goal if time runs short.
+**Why this order:** Phase 11 has zero dependency on anything — start it immediately, in parallel with Phase 9. Phase 16 also only needs Phase 5 (already built). Phase 13 needs the Phase 9 sign-in gate, so start its static-analysis half while waiting and wire the auth check last. Phase 15 is the most complex (needs a GitHub App, not just OAuth) — treat it as a stretch goal if time runs short.
 
 Matching frontend work for every phase below is listed under your name in `frontend.md` — build both ends of a feature yourself so nothing ships without its UI caller (see Integration Check 6).
 
@@ -47,7 +47,7 @@ Matching frontend work for every phase below is listed under your name in `front
   * New endpoint `GET /api/v1/summary/{owner}/{repo}/file?path=...` — one cached LLM call per file, generated once at ingestion and stored in DiskStore, never regenerated on repeat visits.
   * A parallel `GET /api/v1/summary/{owner}/{repo}` builds a repo-level TL;DR via map-reduce over file summaries — this also resolves the "Lost in the Middle" fix flagged in `implemented.md`.
 
-**Why this landed on you, not Garv:** the matching frontend work (graph node coloring, summary panel) is also assigned to you in `frontend.md`, and it has no dependency on Garv's Identity & Data track — reassigned here purely to keep total frontend+backend load balanced across both of you.
+**Alignment:** the matching frontend work (graph node coloring, summary panel) is also tracked in `frontend.md`, aligning frontend and backend delivery cleanly.
 
 ---
 
@@ -58,10 +58,10 @@ Matching frontend work for every phase below is listed under your name in `front
 **1. Change Impact Simulator**
 * **The Problem:** A contributor wants to know, before writing a line, "if I touch this file, what breaks?" — today that's buried inside the Architect chatbot.
 * **Technical Implementation:**
-  * New endpoint `POST /api/v1/impact/simulate` — requires GitHub sign-in (Garv's Phase 9), takes a file path as input.
+  * New endpoint `POST /api/v1/impact/simulate` — requires GitHub sign-in (Phase 9), takes a file path as input.
   * Combines three sources already computed elsewhere: the AST dependency graph (Phase 2), historical PR churn on that file (Phase 2's GraphQL history), and test coverage detected during Environment Setup scanning (Phase 5), if present.
   * Returns a Low / Medium / High risk score plus the concrete list of affected files and existing tests to re-run. No code execution — pure static analysis, deterministic by design.
-* **Sequencing:** build the static-analysis core now; wire the auth check once Garv's Phase 9 JWT contract is frozen (Integration Check 1).
+* **Sequencing:** build the static-analysis core now; wire the auth check once the Phase 9 JWT contract is frozen (Integration Check 1).
 
 ---
 
@@ -73,7 +73,7 @@ Matching frontend work for every phase below is listed under your name in `front
 * **The Problem:** Maintainers spend enormous time on low-quality issue reports and unreviewed PRs.
 * **Technical Implementation:**
   * Requires elevating from plain OAuth (Phase 9) to a proper **GitHub App installation**, with fine-grained, minimal permissions (`issues:write`, `pull_requests:write`) scoped only to repos the maintainer explicitly installs it on. Judges will ask about this scope directly — be ready to name it.
-  * Incoming issues are auto-triaged using the Issue Classification model from Garv's Phase 10, plus a duplicate-detection pass (embedding similarity against existing open issues in that repo).
+  * Incoming issues are auto-triaged using the Issue Classification model from Phase 10, plus a duplicate-detection pass (embedding similarity against existing open issues in that repo).
   * Incoming PRs get an AI-generated review comment: diff summary, an automatic Blast Radius warning (your Phase 13 simulator, run on the PR's changed files), and a CONTRIBUTING.md compliance check.
 
 **2. One-Click PR Actions**
@@ -82,7 +82,7 @@ Matching frontend work for every phase below is listed under your name in `front
   * `POST /api/v1/maintainer/pr/{pr_id}/review` calls GitHub's native PR Review API (`APPROVE`, `REQUEST_CHANGES`, `COMMENT`) directly from the dashboard.
   * Every write action is logged against the maintainer's identity for auditability — no silent automated merges without an explicit human click.
 
-**Important:** Phase 15's GitHub App is a **separate credential** from Phase 9's OAuth app (Integration Check 5) — don't reuse Garv's client ID/secret.
+**Important:** Phase 15's GitHub App is a **separate credential** from Phase 9's OAuth app (Integration Check 5) — don't reuse the client ID/secret.
 
 ---
 
@@ -105,14 +105,14 @@ Matching frontend work for every phase below is listed under your name in `front
 
 ---
 
-## Integration Checks (shared with Garv — same list in `implementation-garv.md`)
+## Integration Checks
 
 Run these at the stated checkpoint, not just at the end.
 
-1. **Freeze the `UserProfile`/session contract before either of you builds on it.** Garv defines it in Phase 9 (JWT payload shape, Skill Fingerprint fields). Your Phase 13 (auth-gated) and Phase 15 (maintainer identity) consume it as-is — no independent reinterpretation. 15-minute sync, not a doc round-trip.
-2. **Garv's Phase 9 must not break anonymous flows.** `ingest`, `chatbot`, `gatekeeper`, `explain`, `intent` all work today with zero auth. After Phase 9 merges, smoke-test the full anonymous path end-to-end before assuming auth is additive.
-3. **Your Phase 11 scanner must stay usable pre-login.** It's meant to run during the Gatekeeper flow, before a user signs in. Confirm Garv's auth middleware doesn't accidentally gate it.
-4. **Mission-state storage decision.** `architect_agent.py`'s `_sessions` is an in-memory dict today (Phase 7). Garv's Phase 14 persistent store is the natural place for it to eventually live — decide explicitly whether it absorbs mission state or leaves it separate; don't let two stores silently diverge.
-5. **Two separate OAuth credentials.** Your Phase 15 GitHub App install and Garv's Phase 9 user OAuth are different app registrations with different secrets — never share a client ID.
+1. **Freeze the `UserProfile`/session contract before building on it.** Defined in Phase 9 (JWT payload shape, Skill Fingerprint fields). Phase 13 (auth-gated) and Phase 15 (maintainer identity) consume it as-is — no independent reinterpretation.
+2. **Phase 9 must not break anonymous flows.** `ingest`, `chatbot`, `gatekeeper`, `explain`, `intent` all work today with zero auth. After Phase 9 merges, smoke-test the full anonymous path end-to-end before assuming auth is additive.
+3. **The Phase 11 scanner must stay usable pre-login.** It's meant to run during the Gatekeeper flow, before a user signs in. Confirm auth middleware doesn't accidentally gate it.
+4. **Mission-state storage decision.** `architect_agent.py`'s `_sessions` is an in-memory dict today (Phase 7). The Phase 14 persistent store is the natural place for it to eventually live — decide explicitly whether it absorbs mission state or leaves it separate; don't let two stores silently diverge.
+5. **Two separate OAuth credentials.** Phase 15 GitHub App install and Phase 9 user OAuth are different app registrations with different secrets — never share a client ID.
 6. **No endpoint ships without its frontend caller in the same PR.** This is the exact gap Phase 7/8 fell into (`/search`, persona onboarding) — check `frontend.md`'s per-phase item list before calling a backend phase "done."
-7. **Your Phase 16 must call into Phase 5's parser, not reimplement it.** One `setup_generator.py` import, checked in review.
+7. **Phase 16 must call into Phase 5's parser, not reimplement it.** One `setup_generator.py` import, checked in review.

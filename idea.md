@@ -1,6 +1,6 @@
 # **DevLens: The AI Navigator for Your Codebase**
 
-**Team Name:** DABBA | **Team Leader:** HARAGAM DEEP SINGH
+**Team Name:** DABBA | **Team Leader:** Anmol Verma
 
 ## **1\. Executive Summary & Vision**
 
